@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SpotlightHub - Premium Product Promotion Platform</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #4f46e5;
+            --secondary: #818cf8;
+            --accent: #c7d2fe;
+            --dark: #1e1b4b;
+            --light: #eef2ff;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            background: var(--light);
+            color: var(--dark);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        .preloader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+        }
+
+        .preloader::after {
+            content: '';
+            width: 50px;
+            height: 50px;
+            border: 5px solid #f3f3f3;
+            border-top: 5px solid var(--primary);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .header {
+            min-height: 100vh;
+            background: linear-gradient(135deg, rgba(79, 70, 229, 0.95), rgba(30, 27, 75, 0.95));
+            position: relative;
+            overflow: hidden;
+        }
+
+        .particles {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+        }
+
+        .particle {
+            position: absolute;
+            width: 5px;
+            height: 5px;
+            background: var(--accent);
+            border-radius: 50%;
+            animation: float 20s linear infinite;
+        }
+
+        @keyframes float {
+            0% {
+                transform: translateY(100vh) scale(0);
+                opacity: 0;
+            }
+            50% {
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-100vh) scale(1);
+                opacity: 0;
+            }
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 25px 0;
+            animation: fadeInDown 1s ease;
+        }
+
+        .logo {
+            font-size: 2rem;
+            font-weight: 700;
+            color: white;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo i {
+            color: var(--accent);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 30px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            padding: 8px 16px;
+            border-radius: 20px;
+        }
+
+        .nav-links a:hover {
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .nav-links .promote-btn {
+            background: white;
+            color: var(--primary);
+            padding: 8px 24px;
+            border-radius: 20px;
+            transition: all 0.3s ease;
+        }
+
+        .nav-links .promote-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(255, 255, 255, 0.2);
+        }
+
+        .hero {
+            text-align: center;
+            padding: 100px 0;
+            color: white;
+        }
+
+        .hero h1 {
+            font-size: 4rem;
+            margin-bottom: 20px;
+            animation: fadeInUp 1s ease;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            max-width: 600px;
+            margin: 0 auto 40px;
+            animation: fadeInUp 1s ease 0.2s;
+            opacity: 0;
+            animation-fill-mode: forwards;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            animation: fadeInUp 1s ease 0.4s;
+            opacity: 0;
+            animation-fill-mode: forwards;
+        }
+
+        .cta-btn {
+            padding: 15px 40px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .primary-btn {
+            background: white;
+            color: var(--primary);
+        }
+
+        .secondary-btn {
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .cta-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .features {
+            padding: 100px 0;
+            background: white;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 50px;
+        }
+
+        .feature-card {
+            padding: 40px;
+            border-radius: 20px;
+            background: white;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            text-align: center;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .feature-icon {
+            width: 70px;
+            height: 70px;
+            background: var(--light);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+            font-size: 1.5rem;
+            color: var(--primary);
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            .nav-links {
+                display: none;
+            }
+            .cta-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="preloader"></div>
+
+    <header class="header">
+        <div class="particles" id="particles"></div>
+        <div class="container">
+            <nav class="navbar">
+                <a href="index.html" class="logo">
+                    <i class="fas fa-rocket"></i>
+                    SpotlightHub
+                </a>
+                <ul class="nav-links">
+                    <li><a href="products.html">Products</a></li>
+                    <li><a href="#features">Features</a></li>
+                    <li><a href="#pricing">Pricing</a></li>
+                    <li><a href="promote.html" class="promote-btn">Promote Now</a></li>
+                </ul>
+            </nav>
+
+            <div class="hero">
+                <h1>Elevate Your Brand</h1>
+                <p>Transform your product's visibility with our premium promotion platform. Reach millions of potential customers and scale your business globally.</p>
+                <div class="cta-buttons">
+                    <a href="promote.html" class="cta-btn primary-btn">Start Promoting</a>
+                    <a href="products.html" class="cta-btn secondary-btn">View Showcase</a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <section class="features" id="features">
+        <div class="container">
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-globe"></i>
+                    </div>
+                    <h3>Global Reach</h3>
+                    <p>Connect with customers worldwide through our extensive network.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <h3>Analytics</h3>
+                    <p>Track your promotion performance with detailed analytics.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-clock"></i>
+                    </div>
+                    <h3>24/7 Support</h3>
+                    <p>Round-the-clock assistance for all your promotion needs.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        // Preloader
+        window.addEventListener('load', () => {
+            document.querySelector('.preloader').style.display = 'none';
+        });
+
+        // Particle animation
+        const particles = document.getElementById('particles');
+        for(let i = 0; i < 50; i++) {
+            const particle = document.createElement('div');
+            particle.className = 'particle';
+            particle.style.left = Math.random() * 100 + '%';
+            particle.style.animationDelay = Math.random() * 20 + 's';
+            particle.style.animationDuration = (Math.random() * 10 + 10) + 's';
+            particles.appendChild(particle);
+        }
+
+        // Smooth scroll
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
+</body>
+</html>

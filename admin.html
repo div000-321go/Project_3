@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard - SpotlightHub</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #4f46e5;
+            --secondary: #818cf8;
+            --accent: #c7d2fe;
+            --dark: #1e1b4b;
+            --light: #eef2ff;
+            --success: #10b981;
+            --warning: #f59e0b;
+            --danger: #ef4444;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            background: var(--light);
+            display: flex;
+            min-height: 100vh;
+        }
+
+        .sidebar {
+            width: 250px;
+            background: white;
+            padding: 20px;
+            box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: var(--primary);
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 30px;
+            text-decoration: none;
+        }
+
+        .nav-links {
+            list-style: none;
+        }
+
+        .nav-link {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 12px;
+            color: var(--dark);
+            text-decoration: none;
+            border-radius: 10px;
+            transition: all 0.3s ease;
+        }
+
+        .nav-link:hover,
+        .nav-link.active {
+            background: var(--light);
+            color: var(--primary);
+        }
+
+        .main-content {
+            flex: 1;
+            padding: 30px;
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .stat-card {
+            background: white;
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+
+        .stat-card h3 {
+            color: #666;
+            font-size: 0.9rem;
+            margin-bottom: 10px;
+        }
+
+        .stat-value {
+            font-size: 1.8rem;
+            font-weight: 600;
+            color: var(--dark);
+        }
+
+        .data-table {
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            overflow: hidden;
+        }
+
+        .table-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px;
+            border-bottom: 1px solid #eee;
+        }
+
+        .search-box {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            background: var(--light);
+            padding: 8px 15px;
+            border-radius: 20px;
+        }
+
+        .search-box input {
+            border: none;
+            background: none;
+            outline: none;
+            font-size: 0.9rem;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th, td {
+            padding: 15px 20px;
+            text-align: left;
+            border-bottom: 1px solid #eee;
+        }
+
+        th {
+            background: var(--light);
+            font-weight: 600;
+            color: var(--dark);
+        }
+
+        .status {
+            padding: 5px 10px;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            font-weight: 500;
+        }
+
+        .status.active {
+            background: var(--success);
+            color: white;
+        }
+
+        .status.pending {
+            background: var(--warning);
+            color: white;
+        }
+
+        .status.expired {
+            background: var(--danger);
+            color: white;
+        }
+
+        .action-btn {
+            padding: 5px 10px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .edit-btn {
+            background: var(--primary);
+            color: white;
+        }
+
+        .delete-btn {
+            background: var(--danger);
+            color: white;
+        }
+
+        .pagination {
+            display: flex;
+            justify-content: flex-end;
+            gap: 10px;
+            padding: 20px;
+        }
+
+        .page-btn {
+            padding: 5px 10px;
+            border: 1px solid var(--primary);
+            border-radius: 5px;
+            color: var(--primary);
+            background: white;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .page-btn.active {
+            background: var(--primary);
+            color: white;
+        }
+
+        @media (max-width: 768px) {
+            .sidebar {
+                width: 70px;
+            }
+
+            .logo span,
+            .nav-link span {
+                display: none;
+            }
+
+            .main-content {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <aside class="sidebar">
+        <a href="#" class="logo">
+            <i class="fas fa-rocket"></i>
+            <span>SpotlightHub</span>
+        </a>
+        
+        <ul class="nav-links">
+            <li>
+                <a href="#" class="nav-link active">
+                    <i class="fas fa-home"></i>
+                    <span>Dashboard</span>
+                </a>
+            </li>
+            <li>
+                <a href="#" class="nav-link">
+                    <i class="fas fa-box"></i>
+                    <span>Products</span>
+                </a>
+            </li>
+            <li>
+                <a href="#" class="nav-link">
+                    <i class="fas fa-chart-line"></i>
+                    <span>Analytics</span>
+                </a>
+            </li>
+            <li>
+                <a href="#" class="nav-link">
+                    <i class="fas fa-cog"></i>
+                    <span>Settings</span>
+                </a>
+            </li>
+        </ul>
+    </aside>
+
+    <main class="main-content">
+        <div class="header">
+            <h1>Dashboard</h1>
+            <div class="search-box">
+                <i class="fas fa-search"></i>
+                <input type="text" placeholder="Search...">
+            </div>
+        </div>
+
+        <div class="stats-grid">
+            <div class="stat-card">
+                <h3>Total Products</h3>
+                <div class="stat-value" id="totalProducts">0</div>
+            </div>
+            <div class="stat-card">
+                <h3>Active Promotions</h3>
+                <div class="stat-value" id="activePromotions">0</div>
+            </div>
+            <div class="stat-card">
+                <h3>Total Revenue</h3>
+                <div class="stat-value" id="totalRevenue">$0</div>
+            </div>
+            <div class="stat-card">
+                <h3>Total Views</h3>
+                <div class="stat-value" id="totalViews">0</div>
+            </div>
+        </div>
+
+        <div class="data-table">
+            <div class="table-header">
+                <h2>Recent Promotions</h2>
+                <button class="action-btn edit-btn">Export Data</button>
+            </div>
+            
+            <table>
+                <thead>
+                    <tr>
+                        <th>Company</th>
+                        <th>Product</th>
+                        <th>Category</th>
+                        <th>Package</th>
+                        <th>Status</th>
+                        <th>Views</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody id="productTableBody">
+                    <!-- Data will be loaded dynamically -->
+                </tbody>
+            </table>
+
+            <div class="pagination">
+                <button class="page-btn active">1</button>
+                <button class="page-btn">2</button>
+                <button class="page-btn">3</button>
+                <button class="page-btn">Next</button>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        // Load dashboard data
+        async function loadDashboardData() {
+            try {
+                const response = await fetch('api/admin/dashboard.php');
+                const data = await response.json();
+                
+                // Update stats
+                document.getElementById('totalProducts').textContent = data.totalProducts;
+                document.getElementById('activePromotions').textContent = data.activePromotions;
+                document.getElementById('totalRevenue').textContent = `$${data.totalRevenue}`;
+                document.getElementById('totalViews').textContent = data.totalViews;
+                
+                // Load products table
+                loadProductsTable(data.recentPromotions);
+            } catch (error) {
+                console.error('Error loading dashboard data:', error);
+            }
+        }
+
+        // Load products table
+        function loadProductsTable(products) {
+            const tableBody = document.getElementById('productTableBody');
+            
+            tableBody.innerHTML = products.map(product => `
+                <tr>
+                    <td>${product.company_name}</td>
+                    <td>${product.product_name}</td>
+                    <td>${product.category}</td>
+                    <td>${product.package_type}</td>
+                    <td><span class="status ${product.status.toLowerCase()}">${product.status}</span></td>
+                    <td>${product.views}</td>
+                    <td>
+                        <button class="action-btn edit-btn" onclick="editProduct(${product.id})">
+                            <i class="fas fa-edit"></i>
+                        </button>
+                        <button class="action-btn delete-btn" onclick="deleteProduct(${product.id})">
+                            <i class="fas fa-trash"></i>
+                        </button>
+                    </td>
+                </tr>
+            `).join('');
+        }
+
+        // Edit product
+        function editProduct(id) {
+            // Implement edit functionality
+            console.log('Edit product:', id);
+        }
+
+        // Delete product
+        function deleteProduct(id) {
+            if (confirm('Are you sure you want to delete this product?')) {
+                // Implement delete functionality
+                console.log('Delete product:', id);
+            }
+        }
+
+        // Search functionality
+        document.querySelector('.search-box input').addEventListener('input', (e) => {
+            const searchTerm = e.target.value.toLowerCase();
+            const rows = document.querySelectorAll('#productTableBody tr');
+            
+            rows.forEach(row => {
+                const text = row.textContent.toLowerCase();
+                row.style.display = text.includes(searchTerm) ? '' : 'none';
+            });
+        });
+
+        // Load initial data
+        loadDashboardData();
+    </script>
+</body>
+</html>

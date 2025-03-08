@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us - Spotlight Hub</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        .header {
+            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('/api/placeholder/1920/1080');
+            background-size: cover;
+            background-position: center;
+            min-height: 60vh;
+            position: relative;
+            color: white;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 0;
+        }
+
+        .logo a {
+            color: white;
+            text-decoration: none;
+            font-size: 28px;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 30px;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-size: 16px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: #ffd700;
+        }
+
+        .hero-text {
+            text-align: center;
+            padding: 100px 0;
+        }
+
+        .hero-text h1 {
+            font-size: 48px;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+        }
+
+        .hero-text p {
+            font-size: 18px;
+            margin-bottom: 30px;
+            line-height: 1.6;
+        }
+
+        .about-content {
+            padding: 80px 0;
+            background-color: white;
+        }
+
+        .features {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+            margin-top: 50px;
+        }
+
+        .feature-card {
+            background: #f8f9fa;
+            padding: 30px;
+            border-radius: 10px;
+            text-align: center;
+            transition: transform 0.3s;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .feature-card h3 {
+            color: #333;
+            margin: 20px 0;
+            font-size: 24px;
+        }
+
+        .feature-card p {
+            color: #666;
+            line-height: 1.6;
+        }
+
+        .cta-section {
+            background: linear-gradient(45deg, #2193b0, #6dd5ed);
+            color: white;
+            padding: 60px 0;
+            text-align: center;
+        }
+
+        .cta-button {
+            display: inline-block;
+            padding: 15px 30px;
+            background: #ffd700;
+            color: #333;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: bold;
+            margin-top: 20px;
+            transition: background 0.3s;
+        }
+
+        .cta-button:hover {
+            background: #ffed4a;
+        }
+
+        .footer {
+            background: #333;
+            color: white;
+            padding: 20px 0;
+            text-align: center;
+        }
+
+        @media (max-width: 768px) {
+            .features {
+                grid-template-columns: 1fr;
+            }
+            
+            .hero-text h1 {
+                font-size: 36px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <nav class="navbar">
+                <div class="logo">
+                    <a href="index.html">Spotlight Hub</a>
+                </div>
+                <ul class="nav-links">
+                    <li><a href="promote.html">Promote</a></li>
+                    <li><a href="services.html">Services</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+            </nav>
+            <div class="hero-text">
+                <h1>About Spotlight Hub</h1>
+                <p>Transforming businesses through strategic promotion and innovative showcase solutions.</p>
+            </div>
+        </div>
+    </header>
+
+    <section class="about-content">
+        <div class="container">
+            <div class="features">
+                <div class="feature-card">
+                    <h3>Premium Showcase</h3>
+                    <p>Display your products in our carefully curated platform, reaching thousands of potential customers daily.</p>
+                </div>
+                <div class="feature-card">
+                    <h3>Targeted Promotion</h3>
+                    <p>Get your products in front of the right audience with our advanced targeting and promotion strategies.</p>
+                </div>
+                <div class="feature-card">
+                    <h3>Analytics & Insights</h3>
+                    <p>Track your product's performance with detailed analytics and actionable insights for better results.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="cta-section">
+        <div class="container">
+            <h2>Ready to Showcase Your Products?</h2>
+            <p>Join thousands of successful businesses already using Spotlight Hub</p>
+            <a href="promote.html" class="cta-button">Start Promoting Today</a>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2024 Spotlight Hub. All rights reserved.</p>
+        </div>
+    </footer>
+</body>
+</html>
